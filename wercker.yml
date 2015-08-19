@@ -1,0 +1,14 @@
+box: phusion/passenger-ruby22
+dev:
+  steps:
+    - bundle-install
+    - internal/watch:
+        code: |
+          bundle exec rails s -p 5000
+        reload: true
+build:
+  steps:
+    - bundle-install
+    - script:
+        name: rspec
+        code: bundle exec rake spec
