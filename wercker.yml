@@ -1,4 +1,9 @@
-box: phusion/passenger-ruby22
+box: ruby:2.2.2
+services:
+  - id: mysql
+    env:
+      MYSQL_ROOT_USERNAME: root
+      MYSQL_ROOT_PASSWORD: root
 dev:
   steps:
     - bundle-install
@@ -9,6 +14,12 @@ dev:
 build:
   steps:
     - bundle-install
+    # - script:
+    #     name: which
+    #     code: which mysql
+    # - script:
+    #     name: sql
+    #     code: mysql -e 'show variables like "%innodb_file%";'
     - script:
         name: rspec
         code: bundle exec rake spec
